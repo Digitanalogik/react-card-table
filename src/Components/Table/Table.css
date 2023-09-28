@@ -6,9 +6,9 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  padding: 1rem;
+  padding: 0;
   box-sizing: border-box;
-  background-color: rgba(120, 240, 90, 0.2);
+  background-color: #A8B160;
 }
 
 .cards {
@@ -16,7 +16,8 @@
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 800px;
+  flex-basis: 90%;
+  background-color: #CBD28F;
 }
 
 .numeric {
