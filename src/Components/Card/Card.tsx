@@ -1,6 +1,6 @@
 import './Card.css';
 
-interface CardProps {
+export interface CardProps {
   type: string;
   value: number;
   title: string;
