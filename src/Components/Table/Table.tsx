@@ -23,6 +23,8 @@ const Table = ({ cards }: TableProps): ReactElement => {
   };
 
   const renderCards = (cards: any, sectionName: string): ReactElement => {
+    // console.log("Render cards", sectionName, cards);
+
     return (
       <div className={`cards ${sectionName}`}>
         {cards.map((card: any) => (
@@ -33,23 +35,23 @@ const Table = ({ cards }: TableProps): ReactElement => {
             description={card?.description}
             image={card?.image}
             selected={isSelected(card.id)}
-            onClick={() => select(card)}
+            onClick={() => select(card.id)}
         />
         ))}
       </div>
     );
   }
 
-  const select = (card: any): void => {
+  const select = (card: number): void => {
     console.log("Select:", card);
-    setSelected(card.id);
+    setSelected(card);
   };
 
   const isSelected = (id: number): boolean => {
     return id === selected;
   };
 
-  console.log("Render Table - selected Card is", selected);
+  // console.log("Render Table - selected Card is", selected);
 
   return (
     <div className='table'>

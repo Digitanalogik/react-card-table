@@ -18,7 +18,15 @@ const Card = ({ type, value, title, description, image, selected, onClick }: Car
     cardClass += " selected";
   }
 
-  console.log("Render Card - selected Card is", selected);
+  /*
+  console.groupCollapsed("Render Card")
+  console.log("- type", type);
+  console.log("- value", value);
+  console.log("- title", title);
+  console.log("- description", description);
+  console.log("- selected", selected);
+  console.groupEnd();
+  */
 
   const renderCard = () => {
     if (type === 'numeric') {
