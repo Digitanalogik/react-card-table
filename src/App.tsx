@@ -20,10 +20,17 @@ const App = (): ReactElement => {
     { id: 10, type: 'special', value: 0, title: 'Coffee Break', description: "Let's have a break", image: 'https://icons.iconarchive.com/icons/iconarchive/fat-sugar-food/256/Drink-Coffee-icon.png' },
   ];
 
-  const PLAYERS: Player[] = [
+  const PLAYERS = [
     { id: 1, name: 'Alice' },
     { id: 2, name: 'Bob' },
-    // ... more users
+    { id: 3, name: 'Charlie' },
+    { id: 4, name: 'David' },
+    { id: 5, name: 'Eva' },
+    { id: 6, name: 'Fiona' },
+    { id: 7, name: 'George' },
+    { id: 8, name: 'Hannah' },
+    { id: 9, name: 'Igor' },
+    { id: 10, name: 'Jane' }
   ];
 
   return (
