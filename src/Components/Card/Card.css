@@ -1,6 +1,8 @@
 .card {
-  background-color: #DEB887;
-  border: 5px solid #C2955C;
+  background-color: #DFBD96;
+  border: 1px solid #BB9163;
+  box-shadow:   1px 1px 0px 1px #966C3D,
+                1px 1px 1px 1px #FFE7CD inset;
   border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
