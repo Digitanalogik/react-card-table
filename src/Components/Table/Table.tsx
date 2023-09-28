@@ -9,7 +9,7 @@ const Table = ({ cards }: TableProps) => {
   return (
     <div className="table">
       {cards.map((card: any, index: number) => (
-        <Card key={index} number={card.number} title={card.title} />
+        <Card key={card.id} number={card.number} title={card.title} />
       ))}
     </div>
   );
