@@ -5,9 +5,10 @@ interface CardProps {
   value: number;
   title: string;
   description?: string
+  image?: string;
 }
 
-const Card = ({ type, value, title, description }: CardProps): JSX.Element => {
+const Card = ({ type, value, title, description, image }: CardProps): JSX.Element => {
 
   const renderCard = () => {
     if (type === 'numeric') {
@@ -27,9 +28,11 @@ const Card = ({ type, value, title, description }: CardProps): JSX.Element => {
   };
 
   const renderSpecial = () => {
+    console.log("Render special card: ", image);
     return (
       <div className="card">
         <span className="card-text">{title}</span>
+        <img className="card-image" src={image} alt={description} />
         <div className="card-title">{description}</div>
       </div>  
     );
