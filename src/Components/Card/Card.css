@@ -14,6 +14,14 @@
   height: 200px;
 }
 
+.cards.numeric .card {
+  width: 100px;
+}
+
+.cards.special .card {
+  width: 200px;
+}
+
 .card-number {
   font-size: 2rem;
   font-weight: bold;
