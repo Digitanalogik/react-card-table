@@ -1,0 +1,11 @@
+.table {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: rgba(120, 240, 90, 0.2);
+}
