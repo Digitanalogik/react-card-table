@@ -32,3 +32,9 @@
   border-bottom-right-radius: 1em;
   border-top: none;
 }
+
+@media (min-width: 1081px) {
+  .cards {
+    padding: 2em;
+  }  
+}
