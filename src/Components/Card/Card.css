@@ -9,12 +9,22 @@
   box-sizing: border-box;
 }
 
+.card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
 .card-number {
   font-size: 2rem;
   font-weight: bold;
-  text-align: center;
 }
 
+.card-text {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
 
 .card-title {
   font-size: 1rem;
