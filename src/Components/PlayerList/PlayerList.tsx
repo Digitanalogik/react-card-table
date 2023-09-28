@@ -9,8 +9,6 @@ interface UserListProps {
 
 const PlayerList: FunctionComponent<UserListProps> = ({ players }) => {
 
-  console.log("Render players:", players);
-
   return (
     <div className='player-list'>
       {players.map(player => 
