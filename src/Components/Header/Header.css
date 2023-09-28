@@ -3,9 +3,10 @@
   display: flex;
   align-items: center;
   padding-left: 1em;
-  border-bottom: solid 1px #7D5700;
-  background-color: #A0740E;
-  box-shadow:   1px 1px 0px 1px #523A00,
-                1px 1px 1px 1px #DCB14C inset;
-
+  border-bottom: solid 1px #6C7521;
+  background-color: #A8B160;
+  box-shadow:   1px 1px 0px 1px #858D3F,
+                1px 1px 1px 0px #CDD490 inset;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
