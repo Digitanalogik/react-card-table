@@ -7,9 +7,18 @@ export interface CardProps {
   title: string;
   description?: string
   image?: string;
+  selected?: boolean;
+  onClick?: () => void;
 }
 
-const Card = ({ type, value, title, description, image }: CardProps): ReactElement => {
+const Card = ({ type, value, title, description, image, selected, onClick }: CardProps): ReactElement => {
+
+  let cardClass = "card";
+  if (selected) {
+    cardClass += " selected";
+  }
+
+  console.log("Render Card - selected Card is", selected);
 
   const renderCard = () => {
     if (type === 'numeric') {
@@ -21,7 +30,7 @@ const Card = ({ type, value, title, description, image }: CardProps): ReactEleme
 
   const renderNumeric = () => {
     return (
-      <div className="card">
+      <div className={cardClass} onClick={onClick}>
         <span className="card-number">{value}</span>
         <div className="card-title">{title}</div>
       </div>  
@@ -29,9 +38,8 @@ const Card = ({ type, value, title, description, image }: CardProps): ReactEleme
   };
 
   const renderSpecial = () => {
-    console.log("Render special card: ", image);
     return (
-      <div className="card">
+      <div className={cardClass}>
         <span className="card-text">{title}</span>
         <img className="card-image" src={image} alt={description} />
         <div className="card-title">{description}</div>
