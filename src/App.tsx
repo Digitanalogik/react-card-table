@@ -1,7 +1,8 @@
+import { ReactElement } from 'react';
 import Table from './Components/Table/Table';
 import './App.css';
 
-const App = (): JSX.Element => {
+const App = (): ReactElement => {
 
   const CARDS = [
     { id: 0, type: 'numeric', value: 0.5, title: 'Half' },

@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import './Card.css';
 
 export interface CardProps {
@@ -8,7 +9,7 @@ export interface CardProps {
   image?: string;
 }
 
-const Card = ({ type, value, title, description, image }: CardProps): JSX.Element => {
+const Card = ({ type, value, title, description, image }: CardProps): ReactElement => {
 
   const renderCard = () => {
     if (type === 'numeric') {
