@@ -4,17 +4,19 @@ import './App.css';
 const App = (): JSX.Element => {
 
   const CARDS = [
-    { "id": 1, "number": 1, "title": "Card 1" },
-    { "id": 2, "number": 2, "title": "Card 2" },
-    { "id": 3, "number": 3, "title": "Card 3" },
-    { "id": 4, "number": 4, "title": "Card 4" },
-    { "id": 5, "number": 5, "title": "Card 5" },
-    { "id": 6, "number": 6, "title": "Card 6" },
-    { "id": 7, "number": 7, "title": "Card 7" },
-    { "id": 8, "number": 8, "title": "Card 8" },
-    { "id": 9, "number": 9, "title": "Card 9" },
-    { "id": 10, "number": 10, "title": "Card 10" }
-  ]
+    { id: 1, type: 'numeric', value: 1, title: 'One' },
+    { id: 2, type: 'numeric', value: 2, title: 'Two' },
+    { id: 3, type: 'numeric', value: 3, title: 'Three' },
+    { id: 4, type: 'numeric', value: 4, title: 'Four' },
+    { id: 5, type: 'numeric', value: 5, title: 'Five' },
+    { id: 6, type: 'numeric', value: 6, title: 'Six' },
+    { id: 7, type: 'numeric', value: 7, title: 'Seven' },
+    { id: 8, type: 'numeric', value: 8, title: 'Eight' },
+    { id: 9, type: 'numeric', value: 9, title: 'Nine' },
+    { id: 10, type: 'numeric', value: 10, title: 'Ten' },
+    { id: 11, type: 'special', value: 0, title: 'Coffee Break', description: "Let's have a coffee break" },
+    { id: 12, type: 'special', value: 0, title: 'Confused', description: "I didn't understand the question" },
+  ];
 
   return (
     <Table cards={CARDS}/>
