@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import Table from './Components/Table/Table';
 import './App.css';
 
-function App() {
+const App = (): JSX.Element => {
+
+  const CARDS = [
+    { "number": 1, "title": "Card 1" },
+    { "number": 2, "title": "Card 2" },
+    { "number": 3, "title": "Card 3" },
+    { "number": 4, "title": "Card 4" },
+    { "number": 5, "title": "Card 5" },
+    { "number": 6, "title": "Card 6" },
+    { "number": 7, "title": "Card 7" },
+    { "number": 8, "title": "Card 8" },
+    { "number": 9, "title": "Card 9" },
+    { "number": 10, "title": "Card 10" }
+  ]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Table cards={CARDS}/>
   );
 }
 
