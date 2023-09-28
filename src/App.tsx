@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import Table from './Components/Table/Table';
 import PlayerList from './Components/PlayerList/PlayerList';
-import Player from './Interfaces/Player';
+import Header from './Components/Header/Header';
 import './App.css';
 
 const App = (): ReactElement => {
@@ -35,8 +35,11 @@ const App = (): ReactElement => {
 
   return (
     <div className='card-table-app'>
-      <Table cards={CARDS}/>
-      <PlayerList players={PLAYERS}/>
+      <Header title='Card Table' />
+      <div className='content'>
+        <Table cards={CARDS}/>
+        <PlayerList players={PLAYERS}/>
+      </div>
     </div>
   );
 }
