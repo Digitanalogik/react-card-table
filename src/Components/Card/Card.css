@@ -1,19 +1,17 @@
 .card {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
+  background-color: #DEB887;
+  border: 5px solid #C2955C;
   border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
   min-width: 150px;
   max-width: 300px;
   box-sizing: border-box;
-}
-
-.card-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  height: 100px;
+  height: 200px;
 }
 
 .card-number {
@@ -28,6 +26,4 @@
 
 .card-title {
   font-size: 1rem;
-  text-align: center;
-  margin-top: 0.5rem;
 }
