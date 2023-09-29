@@ -7,6 +7,7 @@
   width: 100vw;
   box-sizing: border-box;
   background-color: #A8B160;
+  padding: 0 5em;
 }
 
 .cards {
@@ -37,5 +38,12 @@
 @media (min-width: 1081px) {
   .cards {
     padding: 2em;
-  }  
+  }
+}
+
+@media (max-width: 899px) {
+  .table,
+  .cards {
+    padding: 0;
+  }
 }

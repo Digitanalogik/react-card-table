@@ -53,15 +53,25 @@
   .card {
     height: 150px;
   }
+}
+
+@media (max-width: 899px) and (max-height: 899px) {
+  .card {
+    height: 120px;
+  }
+
+  .cards.numeric .card {
+    height: 80px;
+  }
 
   .card-text {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
   }
 
   .card-image {
-    max-width: 70px;
-    margin: 10px;
+    max-width: 50px;
+    margin: 5px;
   }
 }
 
