@@ -88,3 +88,20 @@
     height: 100px;
   }
 }
+
+@media (max-height: 699px) and (min-width: 1280px) {
+  .cards.numeric .card {
+    height: 140px;
+  }
+}
+
+
+@media (max-width: 699px) {
+  .cards.numeric .card {
+    height: 80px;
+  }
+
+  .cards.special .card {
+    height: 120px;
+  }
+}
