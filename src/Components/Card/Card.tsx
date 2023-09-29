@@ -47,7 +47,7 @@ const Card = ({ type, value, title, description, image, selected, onClick }: Car
 
   const renderSpecial = () => {
     return (
-      <div className={cardClass}>
+      <div className={cardClass} onClick={onClick}>
         <span className="card-text">{title}</span>
         <img className="card-image" src={image} alt={description} />
         <div className="card-title">{description}</div>
