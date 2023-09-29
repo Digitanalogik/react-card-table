@@ -26,6 +26,7 @@
 .card-text {
   font-size: 1.25rem;
   font-weight: bold;
+  z-index: 1;
 }
 
 .card-title {
@@ -43,12 +44,7 @@
   background-color: #FFE8CF;
 }
 
-@media (max-width: 1081px) {
-  .card {
-    padding: 0.5em;
-  }
-}
-
+/* Large screens: FullHD and bigger */
 @media (min-width: 1919px) {
   .card {
     padding: 2rem;
@@ -57,19 +53,36 @@
   }
 }
 
+/* Short screen */
 @media (max-height: 899px) {
   .card {
     height: 150px;
   }
 }
 
+/* Narrow screen  */
+@media (max-width: 699px) {
+  .cards.numeric .card {
+    height: 80px;
+  }
+
+  .cards.special .card {
+    height: 120px;
+  }
+
+  .cards.special .card-image {
+    height: 50px;
+  }
+}
+
+/* Limited screen: both vertical and horizontal */
 @media (max-width: 899px) and (max-height: 899px) {
   .card {
     height: 120px;
   }
 
   .cards.numeric .card {
-    height: 80px;
+    height: 100px;
   }
 
   .card-text {
@@ -83,25 +96,59 @@
   }
 }
 
-@media (max-height: 699px) {
-  .cards.numeric .card {
-    height: 100px;
-  }
-}
-
+/* Wide but short screen */
 @media (max-height: 699px) and (min-width: 1280px) {
   .cards.numeric .card {
     height: 140px;
   }
 }
 
-
-@media (max-width: 699px) {
+/* Narrow but tall screen */
+@media (max-width: 699px) and (min-height: 1080px) {
   .cards.numeric .card {
-    height: 80px;
+    height: 120px;
+  }
+}
+
+/* Medium sized screen  */
+@media (max-height: 699px) {
+  .cards.numeric .card {
+    height: 90px;
   }
 
   .cards.special .card {
     height: 120px;
+  }
+
+  .cards.special .card-text {
+    height: 0.5rem;
+  }
+
+  .cards.special .card-image {
+    height: 50px;
+  }
+}
+
+/* Minimum sized screen */
+@media (max-height: 499px) {
+  .cards.numeric .card {
+    height: 70px;
+  }
+
+  .cards.numeric .card-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .cards.special .card {
+    height: 80px;
+  }
+
+  .cards.special .card-text {
+    height: 0.5rem;
+  }
+
+  .cards.special .card-image {
+    height: 40px;
   }
 }
