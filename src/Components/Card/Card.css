@@ -43,9 +43,17 @@
   background-color: #FFE8CF;
 }
 
-@media (min-width: 1081px) {
-  .cards {
-    padding: 2em;
+@media (max-width: 1081px) {
+  .card {
+    padding: 0.5em;
+  }
+}
+
+@media (min-width: 1919px) {
+  .card {
+    padding: 2rem;
+    font-size: 3rem;
+    font-weight: 400;
   }
 }
 
