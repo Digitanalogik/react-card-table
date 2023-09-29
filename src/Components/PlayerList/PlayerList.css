@@ -19,3 +19,9 @@
   height: 50px;
   margin-bottom: 2px;
 }
+
+@media (max-width: 1199px) {
+  .player-list {
+    flex-basis: 25%;
+  }  
+}
