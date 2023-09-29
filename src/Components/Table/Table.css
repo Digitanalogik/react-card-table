@@ -7,7 +7,7 @@
   width: 100vw;
   box-sizing: border-box;
   background-color: #A8B160;
-  padding: 0 5em;
+  padding: 0;
 }
 
 .cards {
@@ -17,27 +17,18 @@
   flex-direction: row;
   flex-basis:100%;
   background-color: #CBD28F;
-}
-
-.numeric {
-  background-color: #D9AFC0;
-  border: solid 1px #FFC59E;
-  border-top-left-radius: 1em;
-  border-top-right-radius: 1em;
-  border-bottom: none;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .special {
-  background-color: #998EAC;
-  border: solid 1px #FFC59E;
-  border-bottom-left-radius: 1em;
-  border-bottom-right-radius: 1em;
-  border-top: none;
+  border-top: solid 1px #A8B160;
 }
 
 @media (min-width: 1081px) {
   .cards {
-    padding: 2em;
+    padding-left: 5em;
+    padding-right: 5em;
   }
 }
 
