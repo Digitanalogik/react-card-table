@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 import Card, { CardProps } from '../Card/Card';
 import ICard from '../../Interfaces/Card';
-import { postSelectedCard } from '../../Services/ApiService';
+import { post } from '../../Services/ApiClient';
 import './Table.css';
 
 interface TableProps {
@@ -49,7 +49,7 @@ const Table = ({ cards }: TableProps): ReactElement => {
     console.log("Selected:", card);
     setSelected(card.id);
     try {
-      const response = await postSelectedCard(card);
+      const response = await post('/card', JSON.stringify(card));
       console.log('Response from API:', response);
     } catch (error) {
       console.error('Error during API request:', error);
