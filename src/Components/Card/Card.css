@@ -14,14 +14,8 @@
   justify-content: space-around;
   align-items: center;
   height: 200px;
-}
-
-.cards.numeric .card {
-  width: 100px;
-}
-
-.cards.special .card {
-  width: 200px;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .card-number {
