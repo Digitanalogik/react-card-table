@@ -45,7 +45,7 @@ const Table = ({ cards }: TableProps): ReactElement => {
 
   return (
     <div className='table'>
-      <div className="cards">
+      <div className="cards-area">
         {renderNumericCards()}
         {renderSpecialCards()}
       </div>
