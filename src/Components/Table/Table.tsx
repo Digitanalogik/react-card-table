@@ -1,5 +1,7 @@
 import { ReactElement, useState } from 'react';
 import Card, { CardProps } from '../Card/Card';
+import ICard from '../../Interfaces/Card';
+import { postSelectedCard } from '../../Services/ApiService';
 import './Table.css';
 
 interface TableProps {
@@ -32,7 +34,7 @@ const Table = ({ cards }: TableProps): ReactElement => {
             description={card?.description}
             image={card?.image}
             selected={isSelected(card.id)}
-            onClick={() => setSelected(card.id)}
+            onClick={() => select(card)}
         />
         ))}
       </div>
@@ -42,6 +44,18 @@ const Table = ({ cards }: TableProps): ReactElement => {
   const isSelected = (id: number): boolean => {
     return id === selected;
   };
+
+  const select = async (card: ICard) => {
+    console.log("Selected:", card);
+    setSelected(card.id);
+    try {
+      const response = await postSelectedCard(card);
+      console.log('Response from API:', response);
+    } catch (error) {
+      console.error('Error during API request:', error);
+    }    
+  };
+
 
   return (
     <div className='table'>
