@@ -40,7 +40,7 @@ const App = (): ReactElement => {
   const renderCardTable = (): ReactElement => {
     return (
       <div className='card-table-app'>
-        <Header title='Card Table' />
+        <Header title={room} />
         <div className='content'>
           <Table cards={CARDS}/>
           <PlayerList players={PLAYERS}/>
