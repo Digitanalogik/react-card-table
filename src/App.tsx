@@ -3,6 +3,7 @@ import Table from './Components/Table/Table';
 import PlayerList from './Components/PlayerList/PlayerList';
 import Header from './Components/Header/Header';
 import './App.css';
+import Login from './Components/Login/Login';
 import { GameContextProvider, useGameContext } from './Context/GameContext';
 
 const App = (): ReactElement => {
@@ -45,10 +46,6 @@ const App = (): ReactElement => {
     }
   }
 
-  const enterRoom = () => {
-    setIsLogged(true);
-  }
-
   const renderCardTable = (): ReactElement => {
     return (
       <div className='card-table-app'>
@@ -66,38 +63,7 @@ const App = (): ReactElement => {
       <div className='card-table-app'>
         <Header title='Select Room' noLogout />
         <div className='content'>
-          <div className='login'>
-            <div className='login-input'>
-              <span className='label'>Player</span>
-              <input type="text"
-                  id='player'
-                  className='player'
-                  aria-label='Player name'
-                  placeholder='Enter player name'
-                  value={player}
-                  onChange={(event) => setPlayer(event.target.value)}
-                />
-            </div>
-            <div className='login-input'>
-              <span className='label'>Room</span>
-              <input type="text"
-                  id='room'
-                  className='room'
-                  aria-label='Room name'
-                  placeholder='Enter room name'
-                  value={room}
-                  onChange={(event) => setRoom(event.target.value)}
-                  onKeyDown={async (event) => {
-                    if (event.key === 'Enter') {
-                      enterRoom()
-                    } else if (event.key === 'Escape') {
-                      setRoom("");
-                    }
-                  }}
-                />
-            </div>
-            <button id='enter' onClick={e => enterRoom()}>Enter</button>
-          </div>
+          <Login />
         </div>
       </div>
     );
