@@ -4,7 +4,7 @@ import PlayerList from './Components/PlayerList/PlayerList';
 import Header from './Components/Header/Header';
 import './App.css';
 import Login from './Components/Login/Login';
-import { GameContextProvider, useGameContext } from './Context/GameContext';
+import { useGameContext } from './Context/GameContext';
 
 const App = (): ReactElement => {
 
