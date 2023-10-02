@@ -14,3 +14,21 @@
   overflow: hidden;
   background-color: #CBD28F;
 }
+
+.room-select {
+  margin: 3em;
+  align-self: center;
+  width: 80%;
+}
+
+.room-name {
+  padding: 1em;
+  font-size: larger;
+  border: solid 1px green;
+  width: 50%;
+}
+
+#enter {
+  padding: 1em;
+  font-size: larger;
+}
