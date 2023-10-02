@@ -7,6 +7,7 @@ import './App.css';
 const App = (): ReactElement => {
 
   const [room, setRoom] = useState<string>("Default Room");
+  const [player, setPlayer] = useState<string>("Default Player");
   const [playing, setPlaying] = useState<boolean>(false);
 
   const CARDS = [
@@ -47,7 +48,7 @@ const App = (): ReactElement => {
       <div className='card-table-app'>
         <Header title={room} logout={logout} />
         <div className='content'>
-          <Table cards={CARDS}/>
+          <Table player={player} room={room} cards={CARDS}/>
           <PlayerList players={PLAYERS}/>
         </div>
       </div>
@@ -58,23 +59,39 @@ const App = (): ReactElement => {
     return (
       <div className='card-table-app'>
         <Header title='Select Room' noLogout />
-        <div className='content room-select'>
-          <input type="text"
-            id='room'
-            className='room-name'
-            aria-label='Room name'
-            placeholder='Enter room name'
-            value={room}
-            onChange={(event) => setRoom(event.target.value)}
-            onKeyDown={async (event) => {
-              if (event.key === 'Enter') {
-                setPlaying(true);
-              } else if (event.key === 'Escape') {
-                setRoom("");
-              }
-            }}
-          />
-          <button id='enter' onClick={e => setPlaying(true)}>Enter</button>
+        <div className='content'>
+          <div className='login'>
+            <div className='login-input'>
+              <span className='label'>Player</span>
+              <input type="text"
+                  id='player'
+                  className='player'
+                  aria-label='Player name'
+                  placeholder='Enter player name'
+                  value={player}
+                  onChange={(event) => setPlayer(event.target.value)}
+                />
+            </div>
+            <div className='login-input'>
+              <span className='label'>Room</span>
+              <input type="text"
+                  id='room'
+                  className='room'
+                  aria-label='Room name'
+                  placeholder='Enter room name'
+                  value={room}
+                  onChange={(event) => setRoom(event.target.value)}
+                  onKeyDown={async (event) => {
+                    if (event.key === 'Enter') {
+                      setPlaying(true);
+                    } else if (event.key === 'Escape') {
+                      setRoom("");
+                    }
+                  }}
+                />
+            </div>
+            <button id='enter' onClick={e => setPlaying(true)}>Enter</button>
+          </div>
         </div>
       </div>
     );
