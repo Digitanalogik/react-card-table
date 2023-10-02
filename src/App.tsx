@@ -1,10 +1,13 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import Table from './Components/Table/Table';
 import PlayerList from './Components/PlayerList/PlayerList';
 import Header from './Components/Header/Header';
 import './App.css';
 
 const App = (): ReactElement => {
+
+  const [room, setRoom] = useState<string>("Default Room");
+  const [playing, setPlaying] = useState<boolean>(false);
 
   const CARDS = [
     { id: 0, type: 'numeric', value: 0.5, title: 'Half' },
@@ -33,15 +36,50 @@ const App = (): ReactElement => {
     { id: 10, name: 'Jane' }
   ];
 
-  return (
-    <div className='card-table-app'>
-      <Header title='Card Table' />
-      <div className='content'>
-        <Table cards={CARDS}/>
-        <PlayerList players={PLAYERS}/>
+
+  const renderCardTable = (): ReactElement => {
+    return (
+      <div className='card-table-app'>
+        <Header title='Card Table' />
+        <div className='content'>
+          <Table cards={CARDS}/>
+          <PlayerList players={PLAYERS}/>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  const renderRoomSelect = (): ReactElement => {
+    return (
+      <div className='card-table-app'>
+        <Header title='Select Room' />
+        <div className='content room-select'>
+          <input type="text"
+            id='room'
+            className='room-name'
+            aria-label='Room name'
+            placeholder='Enter room name'
+            value={room}
+            onChange={(event) => setRoom(event.target.value)}
+            onKeyDown={async (event) => {
+              if (event.key === 'Enter') {
+                setPlaying(true);
+              } else if (event.key === 'Escape') {
+                setRoom("");
+              }
+            }}
+          />
+          <button id='enter' onClick={e => setPlaying(true)}>Enter</button>
+        </div>
+      </div>
+    );
+  };
+  
+  if (playing) {
+    return renderCardTable();
+  } else {
+    return renderRoomSelect();
+  }
 }
 
 export default App;
