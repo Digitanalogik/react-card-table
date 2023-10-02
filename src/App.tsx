@@ -36,10 +36,16 @@ const App = (): ReactElement => {
     { id: 10, name: 'Jane' }
   ];
 
+  const logout = () => {
+    if (window.confirm("Exit room?")) {
+      setPlaying(false);
+    }
+  }
+
   const renderCardTable = (): ReactElement => {
     return (
       <div className='card-table-app'>
-        <Header title={room} />
+        <Header title={room} logout={logout} />
         <div className='content'>
           <Table cards={CARDS}/>
           <PlayerList players={PLAYERS}/>
@@ -51,7 +57,7 @@ const App = (): ReactElement => {
   const renderRoomSelect = (): ReactElement => {
     return (
       <div className='card-table-app'>
-        <Header title='Select Room' />
+        <Header title='Select Room' noLogout />
         <div className='content room-select'>
           <input type="text"
             id='room'
