@@ -1,14 +1,16 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import Table from './Components/Table/Table';
 import PlayerList from './Components/PlayerList/PlayerList';
 import Header from './Components/Header/Header';
 import './App.css';
+import { GameContextProvider, useGameContext } from './Context/GameContext';
 
 const App = (): ReactElement => {
 
-  const [room, setRoom] = useState<string>("Default Room");
-  const [player, setPlayer] = useState<string>("Default Player");
-  const [playing, setPlaying] = useState<boolean>(false);
+  const { 
+    isLogged, setIsLogged, 
+    room, setRoom, 
+    player, setPlayer } = useGameContext();
 
   const CARDS = [
     { id: 0, type: 'numeric', value: 0.5, title: 'Half' },
@@ -39,8 +41,12 @@ const App = (): ReactElement => {
 
   const logout = () => {
     if (window.confirm("Exit room?")) {
-      setPlaying(false);
+      setIsLogged(false);
     }
+  }
+
+  const enterRoom = () => {
+    setIsLogged(true);
   }
 
   const renderCardTable = (): ReactElement => {
@@ -83,21 +89,21 @@ const App = (): ReactElement => {
                   onChange={(event) => setRoom(event.target.value)}
                   onKeyDown={async (event) => {
                     if (event.key === 'Enter') {
-                      setPlaying(true);
+                      enterRoom()
                     } else if (event.key === 'Escape') {
                       setRoom("");
                     }
                   }}
                 />
             </div>
-            <button id='enter' onClick={e => setPlaying(true)}>Enter</button>
+            <button id='enter' onClick={e => enterRoom()}>Enter</button>
           </div>
         </div>
       </div>
     );
   };
   
-  if (playing) {
+  if (isLogged) {
     return renderCardTable();
   } else {
     return renderRoomSelect();
