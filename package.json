@@ -21,8 +21,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server",
+    "dev": "npm run webpack-dev-server -- --env mode=development",
+    "prod": "npm run webpack -- --env mode=production"
   },
+  "proxy": "https://bq4yqr3oxddgcnej4c3vaukvou0myjzd.lambda-url.eu-north-1.on.aws/",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -40,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
   }
 }
