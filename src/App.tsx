@@ -36,7 +36,6 @@ const App = (): ReactElement => {
     { id: 10, name: 'Jane' }
   ];
 
-
   const renderCardTable = (): ReactElement => {
     return (
       <div className='card-table-app'>
