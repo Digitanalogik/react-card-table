@@ -4,10 +4,12 @@ import { post } from '../../Services/ApiClient';
 import './Table.css';
 
 interface TableProps {
+  room: string;
+  player: string;
   cards?:  Array<CardProps>;
 }
 
-const Table = ({ cards }: TableProps): ReactElement => {
+const Table = ({ cards, room, player }: TableProps): ReactElement => {
 
   const [selected, setSelected] = useState<number | null>(null);
 
@@ -49,7 +51,8 @@ const Table = ({ cards }: TableProps): ReactElement => {
     setSelected(card.id);
 
     const postData = {
-      playerName: 'Default',
+      playerName: player,
+      roomName: room,
       cardValue: card?.value,
       cardTitle: card?.title
     };
