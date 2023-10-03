@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
+  font-weight: 400;
   background-color: #A7C385;
   border: solid 1px #4A6D1F;
   border-bottom: none;
@@ -23,5 +24,19 @@
 @media (max-width: 1199px) {
   .player-list {
     flex-basis: 25%;
-  }  
+  }
+
+  .player-name {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 799px) {
+  .player-list {
+    flex-basis: 20%;
+  }
+  
+  .player-name {
+    font-size: 1rem;
+  }
 }

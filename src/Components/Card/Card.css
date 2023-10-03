@@ -13,9 +13,17 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 200px;
   flex-grow: 1;
   flex-shrink: 1;
+  z-index: 3;
+}
+
+.cards.numeric .card {
+  height: 200px;
+}
+
+.cards.special .card {
+  height: 250px;
 }
 
 .card-number {
@@ -55,84 +63,67 @@
 
 /* Short screen */
 @media (max-height: 899px) {
-  .card {
-    height: 150px;
+  .cards.numeric .card {
+    min-height: 50px;
+    max-height: 150px;
+  }
+
+  .cards.special .card {
+    min-height: 80px;
+    max-height: 200px;
+  }
+
+  .cards.special .card-image {
+    height: 50px;
   }
 }
 
 /* Narrow screen  */
 @media (max-width: 699px) {
   .cards.numeric .card {
-    height: 80px;
+    min-width: 100px;
+    max-width: 200px;
+    min-height: 40px;
+    max-height: 90px;
   }
 
   .cards.special .card {
-    height: 120px;
+    min-height: 40px;
+    max-height: 130px;
   }
 
   .cards.special .card-image {
-    height: 50px;
-  }
-}
-
-/* Limited screen: both vertical and horizontal */
-@media (max-width: 899px) and (max-height: 899px) {
-  .card {
-    height: 120px;
-  }
-
-  .cards.numeric .card {
-    height: 100px;
-  }
-
-  .card-text {
-    font-size: 1rem;
-    font-weight: bold;
-  }
-
-  .card-image {
-    max-width: 50px;
-    margin: 5px;
-  }
-}
-
-/* Wide but short screen */
-@media (max-height: 699px) and (min-width: 1280px) {
-  .cards.numeric .card {
-    height: 140px;
-  }
-}
-
-/* Narrow but tall screen */
-@media (max-width: 699px) and (min-height: 1080px) {
-  .cards.numeric .card {
-    height: 120px;
+    height: 30px;
   }
 }
 
 /* Medium sized screen  */
 @media (max-height: 699px) {
   .cards.numeric .card {
-    height: 90px;
+    min-height: 30px;
+    max-height: 70px;
   }
 
   .cards.special .card {
-    height: 120px;
+    min-height: 50px;
+    max-height: 80px;
   }
 
   .cards.special .card-text {
     height: 0.5rem;
+    margin-bottom: 0.5em;
   }
 
   .cards.special .card-image {
-    height: 50px;
+    display: none;
   }
 }
 
 /* Minimum sized screen */
 @media (max-height: 499px) {
   .cards.numeric .card {
-    height: 70px;
+    min-height: 70px;
+    max-height: fit-content;
   }
 
   .cards.numeric .card-number {
