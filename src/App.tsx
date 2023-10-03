@@ -1,17 +1,14 @@
 import { ReactElement } from 'react';
+import Header from './Components/Header/Header';
+import Login from './Components/Login/Login';
 import Table from './Components/Table/Table';
 import PlayerList from './Components/PlayerList/PlayerList';
-import Header from './Components/Header/Header';
-import './App.css';
-import Login from './Components/Login/Login';
 import { useGameContext } from './Context/GameContext';
+import './App.css';
 
 const App = (): ReactElement => {
 
-  const { 
-    isLogged, setIsLogged, 
-    room, setRoom, 
-    player, setPlayer } = useGameContext();
+  const { isLogged, room, player } = useGameContext();
 
   const CARDS = [
     { id: 0, type: 'numeric', value: 0.5, title: 'Half' },
@@ -40,16 +37,10 @@ const App = (): ReactElement => {
     { id: 10, name: 'Jane' }
   ];
 
-  const logout = () => {
-    if (window.confirm("Exit room?")) {
-      setIsLogged(false);
-    }
-  }
-
   const renderCardTable = (): ReactElement => {
     return (
       <div className='card-table-app'>
-        <Header title={room} logout={logout} />
+        <Header title={room} />
         <div className='content'>
           <Table player={player} room={room} cards={CARDS}/>
           <PlayerList players={PLAYERS}/>
@@ -61,7 +52,7 @@ const App = (): ReactElement => {
   const renderRoomSelect = (): ReactElement => {
     return (
       <div className='card-table-app'>
-        <Header title='Select Room' noLogout />
+        <Header title='Select Room' />
         <div className='content'>
           <Login />
         </div>
