@@ -3,6 +3,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useGameContext } from '../../Context/GameContext';
 import { get } from '../../Services/ApiClient';
 import './PlayerList.css';
+import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 
 const PlayerList = (): ReactElement => {
 
@@ -13,10 +14,17 @@ const PlayerList = (): ReactElement => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await get('/players');
-      setPlayers(response);
-
       console.log("API response: ", response);
-    };
+
+      if (Array.isArray(response)) {
+        const dtoPlayers: ScrumPokerPlayer[] = response.map(p => {
+          const dtoPlayer: ScrumPokerPlayer = { id: p.id, name: p.playerName };
+          return dtoPlayer;
+        }) 
+
+        setPlayers(dtoPlayers);
+      }
+    }
 
     // Create a function to start the polling
     const startPolling = () => {
@@ -35,11 +43,11 @@ const PlayerList = (): ReactElement => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, []); // Empty dependency array ensures the effect only runs once
+  }, [setPlayers]); // Empty dependency array ensures the effect only runs once
 
   // List all players
   useEffect(() => {
-    console.group("Scrum Poker - Players");
+    console.groupCollapsed("Scrum Poker - Players");
     players.forEach(p => console.log(p.name));
     console.groupEnd();
   }, [players]);
