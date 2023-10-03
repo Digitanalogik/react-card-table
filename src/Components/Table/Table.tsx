@@ -51,8 +51,10 @@ const Table = ({ cards }: TableProps): ReactElement => {
     setSelected(card.id);
 
     const postData = {
-      playerName: player,
+      playerId: player.id,
+      playerName: player.name,
       roomName: room,
+      roomSecret: secret,
       cardValue: card?.value,
       cardTitle: card?.title
     };
