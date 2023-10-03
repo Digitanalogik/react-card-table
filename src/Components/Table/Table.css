@@ -24,7 +24,12 @@
   z-index: 1;
 }
 
+.numeric {
+  flex-basis: 70%;
+}
+
 .special {
+  flex-basis: 30%;
   border-top: solid 1px #A8B160;
 }
 
