@@ -9,14 +9,14 @@ import './App.css';
 
 const App = (): ReactElement => {
 
-  const { isLogged, room, player } = useGameContext();
+  const { isLogged, room } = useGameContext();
 
   const renderCardTable = (): ReactElement => {
     return (
       <div className='card-table-app'>
         <Header title={room} />
         <div className='content'>
-          <Table player={player} room={room} cards={CARDS}/>
+          <Table cards={CARDS}/>
           <PlayerList players={PLAYERS}/>
         </div>
       </div>
