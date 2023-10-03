@@ -7,6 +7,11 @@ export type ScrumPokerPlayer = {
   name: string;
 }
 
+export const DEFAULT_PLAYER: ScrumPokerPlayer = {
+  id: "0",
+  name: 'Player'
+};
+
 // ToDo: add feature to customize the cards for advanced users
 export const CARDS = [
   { id: 0, type: 'numeric', value: 0.5, title: 'Half' },
