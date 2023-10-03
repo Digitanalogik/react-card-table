@@ -2,6 +2,11 @@
 
 // ToDo: add interfaces / create types
 
+export type ScrumPokerPlayer = {
+  id: string;
+  name: string;
+}
+
 // ToDo: add feature to customize the cards for advanced users
 export const CARDS = [
   { id: 0, type: 'numeric', value: 0.5, title: 'Half' },
