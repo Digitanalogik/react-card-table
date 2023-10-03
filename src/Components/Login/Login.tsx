@@ -2,33 +2,39 @@ import { ReactElement } from 'react';
 import { useGameContext } from '../../Context/GameContext';
 import { post } from '../../Services/ApiClient';
 import './Login.css';
+import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 
 const Login = (): ReactElement => {
 
   const { setIsLogged, player, setPlayer, room, setRoom, secret, setSecret } = useGameContext();
 
   const enterRoom = async () => {
-    // JSON data to send to the API as HTTP POST body payload
-    const data = {
-      playerName: player,
-      roomName: room,
-      roomSecret: secret
-    }
+    if (window.confirm("Enter room " + room + " as " + player.name + "?")) {
+      // JSON data to send to the API as HTTP POST body payload
+      const data = {
+        playerName: player.name,
+        roomName: room,
+        roomSecret: secret
+      }
 
-    // Display debug information in the client browser
-    console.group('Scrum Poker - Enter Room');
-    console.log('Player: ', player);
-    console.log('Room: ', room);
-    console.log('Secret: ', secret);
-    console.groupEnd();
+      // Display debug information in the client browser
+      console.group('Scrum Poker - Enter Room');
+      console.log('Player: ', player);
+      console.log('Room: ', room);
+      console.log('Secret: ', secret);
+      console.groupEnd();
 
-    try {
-      const response = await post('/player', JSON.stringify(data));
-      console.log('Response from API:', response);
-      setIsLogged(true);
-    } catch (error) {
-      console.error('Error during API request:', error);
-      setIsLogged(false);
+      try {
+        const response = await post('/player', JSON.stringify(data));
+        console.log('Response from API:', response);
+
+        const currentPlayer: ScrumPokerPlayer = { id: response.playerId, name: player.name}
+        setPlayer(currentPlayer);
+        setIsLogged(true);
+      } catch (error) {
+        console.error('Error during API request:', error);
+        setIsLogged(false);
+      }
     }
   }
 
@@ -41,8 +47,15 @@ const Login = (): ReactElement => {
           className='player'
           aria-label='Player name'
           placeholder='What is your name?'
-          value={player}
-          onChange={(event) => setPlayer(event.target.value)}
+          value={player.name}
+          onChange={(event) => setPlayer({ id: "0", name: event.target.value })}
+          onKeyDown={async (event) => {
+            if (event.key === 'Enter') {
+              enterRoom()
+            } else if (event.key === 'Escape') {
+              setPlayer({ id: "0", name: "" });
+            }
+          }}
         />
     </div>
     <div className='login-input'>
@@ -74,9 +87,7 @@ const Login = (): ReactElement => {
           onChange={(event) => setSecret(event.target.value)}
           onKeyDown={async (event) => {
             if (event.key === 'Enter') {
-              if (window.confirm("Enter room " + room + " as " + player + "?")) {
-                enterRoom();
-              }
+              enterRoom();
             } else if (event.key === 'Escape') {
               setSecret("");
             }
