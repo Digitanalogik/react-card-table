@@ -1,16 +1,16 @@
 import { ReactElement, useState } from 'react';
 import Card, { CardProps } from '../Card/Card';
 import { post } from '../../Services/ApiClient';
+import { useGameContext } from '../../Context/GameContext';
 import './Table.css';
 
 interface TableProps {
-  room: string;
-  player: string;
   cards?:  Array<CardProps>;
 }
 
-const Table = ({ cards, room, player }: TableProps): ReactElement => {
+const Table = ({ cards }: TableProps): ReactElement => {
 
+  const { player, room, secret } = useGameContext();
   const [selected, setSelected] = useState<number | null>(null);
 
   const numericCards = cards?.filter(card => card.type === 'numeric');
