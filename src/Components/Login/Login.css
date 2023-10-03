@@ -18,7 +18,8 @@
 }
 
 .player,
-.room {
+.room,
+.secret {
   padding: 1em;
   font-size: larger;
   border: solid 1px green;
