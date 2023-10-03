@@ -17,7 +17,7 @@ const App = (): ReactElement => {
         <Header title={room} />
         <div className='content'>
           <Table cards={CARDS}/>
-          <PlayerList players={PLAYERS}/>
+          <PlayerList />
         </div>
       </div>
     );

@@ -11,13 +11,15 @@ type GameContextType = {
   player: ScrumPokerPlayer;
   setPlayer: (player: ScrumPokerPlayer) => void;
 
+  players: ScrumPokerPlayer[];
+  setPlayers: (players: ScrumPokerPlayer[]) => void;
+
   secret: string;
   setSecret: (secret: string) => void;
 }
 
 interface GameContextProps {
   children: ReactElement;
-
 }
 
 const GameContext = createContext<GameContextType>({} as GameContextType);
@@ -35,12 +37,13 @@ const useGameContext = (): GameContextType => {
 const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [room, setRoom] = useState<string>("Default Room");
-  const [player, setPlayer] = useState<ScrumPokerPlayer>(DEFAULT_PLAYER);
   const [secret, setSecret] = useState<string>("");
+  const [player, setPlayer] = useState<ScrumPokerPlayer>(DEFAULT_PLAYER);
+  const [players, setPlayers] = useState<Array<ScrumPokerPlayer>>([] as ScrumPokerPlayer[]);
 
   const gameContextProviderValue = useMemo(() => (
-    { isLogged, setIsLogged, room, setRoom, player, setPlayer, secret, setSecret }),
-    [ isLogged, setIsLogged, room, setRoom, player, setPlayer, secret, setSecret ]);
+    { isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers }),
+    [ isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers ]);
 
   return (
     <GameContext.Provider value={gameContextProviderValue}>
