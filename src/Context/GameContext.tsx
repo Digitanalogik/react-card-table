@@ -9,6 +9,9 @@ type GameContextType = {
 
   player: string;
   setPlayer: (player: string) => void;
+
+  secret: string;
+  setSecret: (secret: string) => void;
 }
 
 interface GameContextProps {
@@ -32,10 +35,11 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [room, setRoom] = useState<string>("Default Room");
   const [player, setPlayer] = useState<string>("Default Player");
+  const [secret, setSecret] = useState<string>("");
 
   const gameContextProviderValue = useMemo(() => (
-    { isLogged, setIsLogged, room, setRoom, player, setPlayer }),
-    [ isLogged, setIsLogged, room, setRoom, player, setPlayer ]);
+    { isLogged, setIsLogged, room, setRoom, player, setPlayer, secret, setSecret }),
+    [ isLogged, setIsLogged, room, setRoom, player, setPlayer, secret, setSecret ]);
 
   return (
     <GameContext.Provider value={gameContextProviderValue}>
