@@ -1,13 +1,13 @@
 // UserList.tsx
-import React, { FunctionComponent } from 'react';
-import Player  from '../../Interfaces/Player';
+import  { ReactElement } from 'react';
+import Player from '../../Interfaces/Player';
 import './PlayerList.css';
 
 interface UserListProps {
   players:  Player[];
 }
 
-const PlayerList: FunctionComponent<UserListProps> = ({ players }) => {
+const PlayerList = ({ players }: UserListProps): ReactElement => {
 
   return (
     <div className='player-list'>
