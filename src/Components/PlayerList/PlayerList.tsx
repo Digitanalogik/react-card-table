@@ -7,7 +7,7 @@ import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 
 const PlayerList = (): ReactElement => {
 
-  const pollingInterval = 10000; // Polling interval in milliseconds (10 seconds)
+  const pollingInterval = 30000; // Polling interval in milliseconds (30 seconds)
 
   const { player, players, setPlayers } = useGameContext();
 
