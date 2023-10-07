@@ -56,8 +56,7 @@ const PlayerList = (): ReactElement => {
   return (
     <div className='player-list'>
         <div key={player.id} className='player-name'>{player.name}</div>
-
-        {players.map(p =>
+        {players.filter(p => p.id !== player.id).map(p =>
             <div key={p.id} className='player-name'>{p.name}</div>
         )}
     </div>
