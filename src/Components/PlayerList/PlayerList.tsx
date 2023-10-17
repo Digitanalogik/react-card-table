@@ -1,13 +1,13 @@
 // UserList.tsx
 import { ReactElement, useEffect, useState } from 'react';
 import { useGameContext } from '../../Context/GameContext';
+import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 import { get } from '../../Services/ApiClient';
 import './PlayerList.css';
-import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 
 const PlayerList = (): ReactElement => {
 
-  const pollingInterval = 30000; // Polling interval in milliseconds (30 seconds)
+  const pollingInterval = 60000; // Polling interval in milliseconds (30 seconds)
 
   const { player, players, setPlayers } = useGameContext();
 
@@ -57,7 +57,7 @@ const PlayerList = (): ReactElement => {
     <div className='player-list'>
         <div key={player.id} className='player-name'>{player.name}</div>
 
-        {players.map(p =>
+        {players.filter(p => p.id !== player.id).map(p =>
             <div key={p.id} className='player-name'>{p.name}</div>
         )}
     </div>
