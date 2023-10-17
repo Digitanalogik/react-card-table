@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { useGameContext } from '../../Context/GameContext';
+import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 import { post } from '../../Services/ApiClient';
 import './Login.css';
-import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 
 const Login = (): ReactElement => {
 
