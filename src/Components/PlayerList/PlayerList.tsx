@@ -1,5 +1,5 @@
 // UserList.tsx
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useGameContext } from '../../Context/GameContext';
 import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 import { get } from '../../Services/ApiClient';

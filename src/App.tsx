@@ -4,7 +4,7 @@ import Login from './Components/Login/Login';
 import Table from './Components/Table/Table';
 import PlayerList from './Components/PlayerList/PlayerList';
 import { useGameContext } from './Context/GameContext';
-import { CARDS, PLAYERS } from './Model/ScrumGame';
+import { CARDS } from './Model/ScrumGame';
 import './App.css';
 
 const App = (): ReactElement => {
