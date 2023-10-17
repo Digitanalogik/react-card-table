@@ -1,5 +1,6 @@
 // UserList.tsx
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useGameContext } from '../../Context/GameContext';
 import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 import { get } from '../../Services/ApiClient';
@@ -9,7 +10,40 @@ const PlayerList = (): ReactElement => {
 
   const pollingInterval = 60000; // Polling interval in milliseconds (30 seconds)
 
-  const { player, players, setPlayers } = useGameContext();
+  const { player, players, setPlayers, setIsLogged } = useGameContext();
+
+  const DEFAULT_URL = "wss://bu0l60z3k2.execute-api.eu-north-1.amazonaws.com/production";
+  const [websocketURL, setWebsocketURL] = useState<string>(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(websocketURL, {
+    onOpen: () => {
+      console.log('WebSocket connection established.');
+      setIsLogged(true);
+    },
+    onMessage: (event) => {
+      console.log("WebSocket message: ", event)
+    },
+    onClose: () => {
+      console.log('WebSocket connection disconnected.');
+      // setIsLogged(true);
+    },
+    onError: (event) => {
+      console.log("WebSocket error: ", event)      
+    },
+
+    share: true,
+    filter: () => false,
+    retryOnError: true,
+    shouldReconnect: () => true
+  });
+
+  useEffect(() => {
+    console.log("WebSocket connect to ", websocketURL);
+  }, [websocketURL]);
+
+  useEffect(() => {
+    console.log("Current Player: ", player);
+    setWebsocketURL(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
+  }, [player, setWebsocketURL])
 
   useEffect(() => {
     const fetchData = async () => {
