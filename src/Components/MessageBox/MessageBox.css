@@ -1,0 +1,10 @@
+.message-box {
+  float: right;
+  display: block;
+  width: 100%;
+  height: 50%;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  border-top: solid 1px rgba(64, 64, 64, 0.75);
+}
