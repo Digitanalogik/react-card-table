@@ -1,48 +1,14 @@
-// UserList.tsx
-import { ReactElement, useState, useEffect } from 'react';
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+import React, { ReactElement, useEffect } from 'react';
 import { useGameContext } from '../../Context/GameContext';
 import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 import { get } from '../../Services/ApiClient';
 import './PlayerList.css';
-import InfoRow from '../InfoRow/InfoRow';
 
 const PlayerList = (): ReactElement => {
 
   const pollingInterval = 60000; // Polling interval in milliseconds (30 seconds)
 
-  const { player, players, setPlayers, setIsLogged } = useGameContext();
-
-  const [status, setStatus] = useState<string>("");
-
-  const DEFAULT_URL = "wss://bu0l60z3k2.execute-api.eu-north-1.amazonaws.com/production";
-  const [websocketURL, setWebsocketURL] = useState<string>(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
-  const { sendMessage, lastMessage, readyState } = useWebSocket(websocketURL, {
-    onOpen: () => {
-      console.log('WebSocket connection established.');
-      setIsLogged(true);
-    },
-    onMessage: (event) => {
-      console.log("WebSocket message: ", event)
-    },
-    onClose: () => {
-      console.log('WebSocket connection disconnected.');
-      setIsLogged(true);
-    },
-    onError: (event) => {
-      console.log("WebSocket error: ", event);
-    },
-
-    share: true,
-    filter: () => false,
-    retryOnError: true,
-    shouldReconnect: () => true
-  });
-  
-  useEffect(() => {
-    console.log("Current Player: ", player);
-    setWebsocketURL(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
-  }, [player, setWebsocketURL])
+  const { player, players, setPlayers } = useGameContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,30 +51,6 @@ const PlayerList = (): ReactElement => {
     console.groupEnd();
   }, [players]);
 
-  // WebSocket connection status
-  useEffect(() => {
-    switch(readyState) {
-      case ReadyState.CONNECTING:
-        setStatus("Connecting...");
-        break;
-      case ReadyState.OPEN:
-        setStatus("Connected!");
-        break;
-      case ReadyState.CLOSING:
-        setStatus("Closing...");
-        break;
-      case ReadyState.CLOSED:
-        setStatus("Closed.");
-        break;
-      case ReadyState.UNINSTANTIATED:
-        setStatus("Uninstantiated.");
-        break;
-      default:
-        setStatus("Unknown state.");
-        break;
-    };  
-  }, [readyState]);
-
 
   // Always show current player on top of the list
   return (
@@ -118,7 +60,6 @@ const PlayerList = (): ReactElement => {
         {players.filter(p => p.id !== player.id).map(p =>
             <div key={p.id} className='player-name'>{p.name}</div>
         )}
-        <InfoRow data={`WebSocket status: ${status}`} />
     </div>
   );
 };
