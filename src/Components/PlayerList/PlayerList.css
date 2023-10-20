@@ -4,6 +4,7 @@
   border-left: solid 1px #2D4A09;
   background-color: #A9C585;
   flex-basis: 30%;
+  min-height: 50%;
 }
 
 .player-name {
