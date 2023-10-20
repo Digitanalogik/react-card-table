@@ -5,6 +5,7 @@
   background-color: #A9C585;
   flex-basis: 30%;
   min-height: 50%;
+  width: 100%;
 }
 
 .player-name {
