@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import { GameContextProvider } from './Context/GameContext';
+import { WebSocketContextProvider } from './Context/WebSocketContext';
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GameContextProvider>
-      <App />
+      <WebSocketContextProvider>
+        <App />
+      </WebSocketContextProvider>
     </GameContextProvider>
   </React.StrictMode>
 );
