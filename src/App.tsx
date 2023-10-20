@@ -5,6 +5,8 @@ import Table from './Components/Table/Table';
 import PlayerList from './Components/PlayerList/PlayerList';
 import { useGameContext } from './Context/GameContext';
 import { CARDS } from './Model/ScrumGame';
+import VerticalContainer from './Components/VerticalContainer/VerticalContainer';
+import MessageBox from './Components/MessageBox/MessageBox';
 import './App.css';
 
 const App = (): ReactElement => {
@@ -17,7 +19,10 @@ const App = (): ReactElement => {
         <Header title={room} />
         <div className='content'>
           <Table cards={CARDS}/>
-          <PlayerList />
+          <VerticalContainer>
+            <PlayerList />
+            <MessageBox />
+          </VerticalContainer>
         </div>
       </div>
     );
