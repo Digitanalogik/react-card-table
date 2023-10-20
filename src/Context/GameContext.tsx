@@ -51,4 +51,5 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
     </GameContext.Provider>
   );
 }
+
 export { GameContext, GameContextProvider, useGameContext };
