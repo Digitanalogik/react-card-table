@@ -2,13 +2,18 @@ import React, { ReactElement, createContext, useContext, useState, useEffect, us
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useGameContext } from './GameContext';
 
+type WebSocketMessageType = {
+  message: string;
+  timestamp: string;
+};
+
 type WebSocketContextType = {
   connectionStatus: string;
 
   lastMessage: MessageEvent | null;
   
-  messageHistory: string[];
-  setMessageHistory: (messageHistory: string[]) => void;
+  messageHistory: WebSocketMessageType[];
+  setMessageHistory: (messageHistory: WebSocketMessageType[]) => void;
 
   sendMessage: (message: string) => void;
 }
@@ -30,23 +35,27 @@ const useWebSocketConnection = (): WebSocketContextType => {
 }
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
+
   const { player, isLogged, setIsLogged } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
-  const [ messageHistory, setMessageHistory ] = useState<string[]>([]);
+  const [ messageHistory, setMessageHistory ] = useState<WebSocketMessageType[]>([]);
 
   const DEFAULT_URL = "wss://bu0l60z3k2.execute-api.eu-north-1.amazonaws.com/production";
-  const [websocketURL, setWebsocketURL] = useState<string>(`${DEFAULT_URL}?id=${player.id}&name=${player.name}&room=${player.room}}`);
+  const [websocketURL, setWebsocketURL] = useState<string>(`${DEFAULT_URL}?id=${player.id}&name=${player.name}}`);
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket(websocketURL, {
+  const { sendMessage, lastMessage, readyState } = useWebSocket(
+    player?.id !== "0" ? websocketURL : DEFAULT_URL, {
     onOpen: () => {
       console.log('WebSocket connection established.');
       setIsLogged(true);
     },
     onMessage: (event) => {
-      console.log("WebSocket message: ", event);
-      
-      const newBuffer = [ event.data, ...messageHistory ];
+      console.log("WebSocket message event: ", event);
+       
+      const newMessage: WebSocketMessageType = { message: event.data, timestamp: Date.now().toString() };
+
+      const newBuffer = [ newMessage, ...messageHistory ];
       setMessageHistory(newBuffer);
 
     },
@@ -68,9 +77,11 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
     if (isLogged) {
       console.log("Current Player: ", player);
       setWebsocketURL(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`); 
+    } else {
+      const LOGOUT_ACTION = `{ "action": "logout", "id": ${player.id} }`;
+      sendMessage(LOGOUT_ACTION);
     }
   }, [player, isLogged, setWebsocketURL]);
-
 
   useEffect(() => {
     switch(readyState) {
