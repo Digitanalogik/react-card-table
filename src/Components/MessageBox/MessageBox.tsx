@@ -10,7 +10,9 @@ const MessageBox = () => {
   const renderMessages = (): ReactElement => {
     const messages: ReactElement[] = [];
 
-    messageHistory.forEach(msg => messages.push(<InfoRow data={msg} />));
+    messageHistory.forEach(msg => messages.push(
+      <InfoRow key={msg.timestamp} data={msg.message} />
+    ));
 
     return (
       <React.Fragment>
