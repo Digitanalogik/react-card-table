@@ -1,16 +1,30 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useWebSocketConnection } from "../../Context/WebSocketContext";
 import InfoRow from "../InfoRow/InfoRow";
 import "./MessageBox.css";
 
 const MessageBox = () => {
 
-  const { connectionStatus } = useWebSocketConnection();
+  const { connectionStatus, messageHistory } = useWebSocketConnection();
+
+  const renderMessages = (): ReactElement => {
+    const messages: ReactElement[] = [];
+
+    messageHistory.forEach(msg => messages.push(<InfoRow data={msg} />));
+
+    return (
+      <React.Fragment>
+        {messages}
+      </React.Fragment>
+    ) 
+    
+  }
 
   return (
     <div className="message-box">
       <InfoRow data="Message Box" />
       <InfoRow data={connectionStatus} />
+      {renderMessages()}
     </div>
   )
 };
