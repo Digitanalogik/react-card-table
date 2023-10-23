@@ -5,6 +5,7 @@
 export type ScrumPokerPlayer = {
   id: string;
   name: string;
+  room?: string;
 }
 
 export const DEFAULT_PLAYER: ScrumPokerPlayer = {

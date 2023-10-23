@@ -36,7 +36,7 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
   const [ messageHistory, setMessageHistory ] = useState<string[]>([]);
 
   const DEFAULT_URL = "wss://bu0l60z3k2.execute-api.eu-north-1.amazonaws.com/production";
-  const [websocketURL, setWebsocketURL] = useState<string>(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
+  const [websocketURL, setWebsocketURL] = useState<string>(`${DEFAULT_URL}?id=${player.id}&name=${player.name}&room=${player.room}}`);
 
   const { sendMessage, lastMessage, readyState } = useWebSocket(websocketURL, {
     onOpen: () => {
