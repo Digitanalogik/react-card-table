@@ -30,7 +30,7 @@ const useWebSocketConnection = (): WebSocketContextType => {
 }
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
-  const { player, setIsLogged } = useGameContext();
+  const { player, isLogged, setIsLogged } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
   const [ messageHistory, setMessageHistory ] = useState<string[]>([]);
@@ -65,9 +65,11 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
   });
 
   useEffect(() => {
-    console.log("Current Player: ", player);
-    setWebsocketURL(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
-  }, [player, setWebsocketURL]);
+    if (isLogged) {
+      console.log("Current Player: ", player);
+      setWebsocketURL(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`); 
+    }
+  }, [player, isLogged, setWebsocketURL]);
 
 
   useEffect(() => {
