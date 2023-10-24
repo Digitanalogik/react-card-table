@@ -51,7 +51,6 @@ const PlayerList = (): ReactElement => {
     console.groupEnd();
   }, [players]);
 
-
   // Always show current player on top of the list
   return (
     <div className='player-list'>
