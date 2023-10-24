@@ -1,5 +1,6 @@
 import { ReactElement }from 'react';
 import { useGameContext  } from '../../Context/GameContext';
+import { useWebSocketContext } from '../../Context/WebSocketContext';
 import './Header.css';
 
 interface HeaderProps {
@@ -10,9 +11,12 @@ interface HeaderProps {
 const Header = ({ title, noLogout }: HeaderProps): ReactElement => {
 
   const { isLogged, setIsLogged  } = useGameContext();
+  const { sendMessage } = useWebSocketContext();
 
   const confirmLogout = () => {
     if (window.confirm("Exit room?")) {
+      const LOGOUT_ACTION = `{"action":"logout"}`;
+      sendMessage(LOGOUT_ACTION);
       setIsLogged(false);
     }
   }
