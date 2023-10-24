@@ -24,8 +24,8 @@ const PlayerList = (): ReactElement => {
     }
 
     fetchData();
-  }, [setPlayers]); // Empty dependency array ensures the effect only runs once
-
+  }, [room, secret, setPlayers]);
+  
   // List all players
   useEffect(() => {
     console.groupCollapsed("Scrum Poker - Players");
