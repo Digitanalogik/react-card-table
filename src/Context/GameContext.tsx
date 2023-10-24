@@ -44,18 +44,25 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
   const [player, setPlayer] = useState<ScrumPokerPlayer>(DEFAULT_PLAYER);
   const [players, setPlayers] = useState<Array<ScrumPokerPlayer>>([] as ScrumPokerPlayer[]);
 
-  const addPlayer = (player: ScrumPokerPlayer) => {
-    setPlayers([ ...players, player ]);
-  }
-
-  const removePlayer = (id: string) => {
-    setPlayers(players.filter(player => player.id !== id));
-  }
-
-  const gameContextProviderValue = useMemo(() => (
-    { isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers, addPlayer, removePlayer }),
-    [ isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers, addPlayer, removePlayer ]);
-
+  const gameContextProviderValue = useMemo(() => {
+    const addPlayer = (player: ScrumPokerPlayer) => {
+      setPlayers([ ...players, player ]);
+    }
+  
+    const removePlayer = (id: string) => {
+      setPlayers(players.filter(player => player.id !== id));
+    }
+  
+    return {
+      isLogged, setIsLogged,
+      room, setRoom,
+      secret, setSecret,
+      player, setPlayer,
+      players, setPlayers,
+      addPlayer, removePlayer 
+    };
+  }, [ isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers ]);
+  
   return (
     <GameContext.Provider value={gameContextProviderValue}>
       {children}
