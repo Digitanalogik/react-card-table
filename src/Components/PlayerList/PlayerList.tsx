@@ -6,11 +6,11 @@ import './PlayerList.css';
 
 const PlayerList = (): ReactElement => {
 
-  const { player, players, setPlayers } = useGameContext();
+  const { player, players, setPlayers, room, secret } = useGameContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await get('/players');
+      const response = await get(`/players?room=${room}&secret=${secret}`);
       console.log("API response: ", response);
 
       if (Array.isArray(response)) {
@@ -22,7 +22,7 @@ const PlayerList = (): ReactElement => {
         setPlayers(dtoPlayers);
       }
     }
-    
+
     fetchData();
   }, [setPlayers]); // Empty dependency array ensures the effect only runs once
 
