@@ -1,6 +1,7 @@
-import React, { ReactElement, createContext, useContext, useState, useRef, useEffect, useMemo } from 'react';
+import React, { ReactElement, createContext, useContext, useState, useEffect, useMemo } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useGameContext } from './GameContext';
+import { ScrumPokerPlayer } from '../Model/ScrumGame';
 
 type WebSocketMessageType = {
   message: string;
@@ -36,7 +37,7 @@ const useWebSocketContext = (): WebSocketContextType => {
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
 
-  const { player, isLogged } = useGameContext();
+  const { player, players, setPlayers, addPlayer, isLogged } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
   const [ messageHistory, setMessageHistory ] = useState<WebSocketMessageType[]>([]);
@@ -60,8 +61,30 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
     },
     onMessage: (event) => {
       console.log("WebSocket message event: ", event);
-        
-      const newMessage: WebSocketMessageType = { message: event.data, timestamp: Date.now().toString() };
+
+      let newMessage: WebSocketMessageType = { message: '', timestamp: Date.now().toString() };
+
+      try {
+        if (event.data) {
+          const data = JSON.parse(event.data);
+
+          console.log("WebSocket event data: ", data);
+
+          if (data?.action === "player-join") {
+            const newPlayer: ScrumPokerPlayer = { id: data.id, name: data.name, room: player.room };
+            addPlayer(newPlayer);
+
+            newMessage.message = data.name + " joined the game.";
+          } else {
+            // ToDo: Handle more actions...
+            newMessage.message = "Unknown action: " + data.action + " (" + JSON.stringify(data) + ")";
+          }
+        } else {
+          newMessage.message = event.data;
+        }
+      } catch (error) {
+        console.error("Error while parsing JSON message.");
+      }
 
       const newBuffer = [ newMessage, ...messageHistory ];
       setMessageHistory(newBuffer);
