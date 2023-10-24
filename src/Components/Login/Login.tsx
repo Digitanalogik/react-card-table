@@ -2,13 +2,13 @@ import { ReactElement } from 'react';
 import { useGameContext } from '../../Context/GameContext';
 import { ScrumPokerPlayer } from '../../Model/ScrumGame';
 import { post } from '../../Services/ApiClient';
-import { useWebSocketConnection } from '../../Context/WebSocketContext';
+import { useWebSocketContext } from '../../Context/WebSocketContext';
 import './Login.css';
 
 const Login = (): ReactElement => {
 
   const { setIsLogged, player, setPlayer, room, setRoom, secret, setSecret } = useGameContext();
-  const { setMessageHistory } = useWebSocketConnection();
+  const { setMessageHistory } = useWebSocketContext();
 
   const enterRoom = async () => {
     if (window.confirm("Enter room " + room + " as " + player.name + "?")) {
@@ -32,7 +32,11 @@ const Login = (): ReactElement => {
 
         const currentPlayer: ScrumPokerPlayer = { id: response.playerId, name: player.name}
         setPlayer(currentPlayer);
-        setIsLogged(true);
+        
+        if (response.playerId) {
+          setIsLogged(true);
+        }
+        
         setMessageHistory([]);
       } catch (error) {
         console.error('Error during API request:', error);

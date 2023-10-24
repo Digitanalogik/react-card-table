@@ -1,4 +1,4 @@
-import React, { ReactElement, createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { ReactElement, createContext, useContext, useState, useRef, useEffect, useMemo } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useGameContext } from './GameContext';
 
@@ -24,7 +24,7 @@ interface WebSocketContextProps {
 
 const WebSocketContext = createContext<WebSocketContextType>({} as WebSocketContextType);
 
-const useWebSocketConnection = (): WebSocketContextType => {
+const useWebSocketContext = (): WebSocketContextType => {
   const context = useContext(WebSocketContext);
 
   if (!context) {
@@ -36,23 +36,31 @@ const useWebSocketConnection = (): WebSocketContextType => {
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
 
-  const { player, isLogged, setIsLogged } = useGameContext();
+  const { player, isLogged } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
   const [ messageHistory, setMessageHistory ] = useState<WebSocketMessageType[]>([]);
 
   const DEFAULT_URL = "wss://bu0l60z3k2.execute-api.eu-north-1.amazonaws.com/production";
-  const [websocketURL, setWebsocketURL] = useState<string>(`${DEFAULT_URL}?id=${player.id}&name=${player.name}}`);
+  const [websocketURL, setWebsocketURL] = useState<string | null>(null);
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket(
-    player?.id !== "0" ? websocketURL : DEFAULT_URL, {
+  useEffect(() => {
+    console.log("WebSocketContext - useEffect - Player:", player);
+    if (player?.id !== "0" && isLogged) {
+      console.log("Connecting WebSocket URL: ", `${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
+      setWebsocketURL(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`);
+    } else {
+      setWebsocketURL(null);
+    }
+  }, [player, isLogged, setWebsocketURL]);
+
+  const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket(websocketURL, {
     onOpen: () => {
       console.log('WebSocket connection established.');
-      setIsLogged(true);
     },
     onMessage: (event) => {
       console.log("WebSocket message event: ", event);
-       
+        
       const newMessage: WebSocketMessageType = { message: event.data, timestamp: Date.now().toString() };
 
       const newBuffer = [ newMessage, ...messageHistory ];
@@ -61,7 +69,6 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
     },
     onClose: () => {
       console.log('WebSocket connection disconnected.');
-      setIsLogged(true);
     },
     onError: (event) => {
       console.log("WebSocket error: ", event);
@@ -71,17 +78,7 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
     filter: () => false,
     retryOnError: true,
     shouldReconnect: () => true
-  });
-
-  useEffect(() => {
-    if (isLogged) {
-      console.log("Current Player: ", player);
-      setWebsocketURL(`${DEFAULT_URL}?id=${player.id}&name=${player.name}`); 
-    } else {
-      const LOGOUT_ACTION = `{ "action": "logout", "id": ${player.id} }`;
-      sendMessage(LOGOUT_ACTION);
-    }
-  }, [player, isLogged, setWebsocketURL]);
+  }, isLogged);
 
   useEffect(() => {
     switch(readyState) {
@@ -107,8 +104,8 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
   }, [readyState]);
 
   const webSocketContextProviderValue = useMemo(() => (
-    { connectionStatus, lastMessage, messageHistory, setMessageHistory, sendMessage }),
-    [ connectionStatus, lastMessage, messageHistory, setMessageHistory, sendMessage ]);
+    { connectionStatus, lastMessage, messageHistory, setMessageHistory, sendMessage, getWebSocket }),
+    [ connectionStatus, lastMessage, messageHistory, setMessageHistory, sendMessage, getWebSocket ]);
 
   return (
     <WebSocketContext.Provider value={webSocketContextProviderValue}>
@@ -118,4 +115,4 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
   );
 }
 
-export { WebSocketContext, WebSocketContextProvider, useWebSocketConnection };
+export { WebSocketContext, WebSocketContextProvider, useWebSocketContext };

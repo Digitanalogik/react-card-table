@@ -1,11 +1,11 @@
 import React, { ReactElement } from "react";
-import { useWebSocketConnection } from "../../Context/WebSocketContext";
+import { useWebSocketContext } from "../../Context/WebSocketContext";
 import InfoRow from "../InfoRow/InfoRow";
 import "./MessageBox.css";
 
 const MessageBox = () => {
 
-  const { connectionStatus, messageHistory } = useWebSocketConnection();
+  const { connectionStatus, messageHistory } = useWebSocketContext();
 
   const renderMessages = (): ReactElement => {
     const messages: ReactElement[] = [];
