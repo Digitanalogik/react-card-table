@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { useWebSocketContext } from "../../Context/WebSocketContext";
 import InfoRow from "../InfoRow/InfoRow";
 import "./MessageBox.css";
+import InputBox from "../InputBox/InputBox";
 
 const MessageBox = () => {
 
@@ -24,7 +25,7 @@ const MessageBox = () => {
 
   return (
     <div className="message-box">
-      <InfoRow data="Message Box" />
+      <InputBox />
       <InfoRow data={connectionStatus} />
       {renderMessages()}
     </div>
