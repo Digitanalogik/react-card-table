@@ -80,6 +80,10 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
             removePlayer(data.id);
 
             newMessage.message = data.name + " left the game.";
+          } else if (data?.action === "player-message") {
+
+            newMessage.message = data.name + ": " + data.message;
+
           } else {
             // ToDo: Handle more actions...
             newMessage.message = "Unknown action: " + data.action + " (" + JSON.stringify(data) + ")";
