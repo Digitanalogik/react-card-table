@@ -37,7 +37,7 @@ const useWebSocketContext = (): WebSocketContextType => {
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
 
-  const { player, players, setPlayers, addPlayer, isLogged } = useGameContext();
+  const { player, addPlayer, removePlayer, isLogged } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
   const [ messageHistory, setMessageHistory ] = useState<WebSocketMessageType[]>([]);
@@ -75,6 +75,11 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
             addPlayer(newPlayer);
 
             newMessage.message = data.name + " joined the game.";
+          } else if (data?.action === "player-logout") {
+
+            removePlayer(data.id);
+
+            newMessage.message = data.name + " left the game.";
           } else {
             // ToDo: Handle more actions...
             newMessage.message = "Unknown action: " + data.action + " (" + JSON.stringify(data) + ")";
