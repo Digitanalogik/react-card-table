@@ -6,8 +6,6 @@ import './PlayerList.css';
 
 const PlayerList = (): ReactElement => {
 
-  const pollingInterval = 60000; // Polling interval in milliseconds (30 seconds)
-
   const { player, players, setPlayers } = useGameContext();
 
   useEffect(() => {
@@ -24,24 +22,8 @@ const PlayerList = (): ReactElement => {
         setPlayers(dtoPlayers);
       }
     }
-
-    // Create a function to start the polling
-    const startPolling = () => {
-      fetchData();
-
-      // Set a timeout to call the startPolling function again after the polling interval
-      return setTimeout(() => {
-        startPolling();
-      }, pollingInterval);
-    };
-
-    // Start polling for backend API
-    const timeoutId = startPolling();
-
-    // Cleanup function to clear the timeout when the component is unmounted
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    
+    fetchData();
   }, [setPlayers]); // Empty dependency array ensures the effect only runs once
 
   // List all players
