@@ -1,0 +1,22 @@
+.input-box {
+  display: block;
+  width: 100%;
+  position: relative;
+  border: solid 1px rgba(64, 64, 64, 0.75);
+  background-color: lightgoldenrodyellow;
+  padding: 0.1em;
+}
+
+#message-box {
+  background-color: #D2E6B9;
+  padding: 0.25em;
+  height: 2.5em;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+#send-button {
+  padding: 0.25em;
+  height: 2.5em;
+  width: 20%;
+}
