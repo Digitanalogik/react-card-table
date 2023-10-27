@@ -67,23 +67,23 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
       try {
         if (event.data) {
           const data = JSON.parse(event.data);
-
           console.log("WebSocket event data: ", data);
 
           if (data?.action === "player-join") {
             const newPlayer: ScrumPokerPlayer = { id: data.id, name: data.name, room: player.room };
             addPlayer(newPlayer);
-
             newMessage.message = data.name + " joined the game.";
           } else if (data?.action === "player-logout") {
-
             removePlayer(data.id);
-
             newMessage.message = data.name + " left the game.";
+          } else if (data?.action === "player-disconnect") {
+            removePlayer(data.id);
+            newMessage.message = data.name + " is disconnected from the game.";
+          } else if (data?.action === "player-vote") {
+            newMessage.message = data.name + " voted.";
+            // ToDo: Update player vote
           } else if (data?.action === "player-message") {
-
             newMessage.message = data.name + ": " + data.message;
-
           } else {
             // ToDo: Handle more actions...
             newMessage.message = "Unknown action: " + data.action + " (" + JSON.stringify(data) + ")";
