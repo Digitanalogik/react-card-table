@@ -44,7 +44,7 @@ const PlayerList = (): ReactElement => {
   // Always show current player on top of the list
   return (
     <div className='player-list'>
-        <div key={player.id} className='player-name'>{player.name}</div>
+        <div key={player.id} className={getClassNames(player)}>{player.name}</div>
 
         {players.filter(p => p.id !== player.id).map(p =>
           <div key={p.id} className={getClassNames(p)}>{p.name}</div>
