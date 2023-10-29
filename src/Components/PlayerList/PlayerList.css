@@ -23,6 +23,11 @@
   margin-bottom: 2px;
 }
 
+.voted {
+  background-color: #83A45A;
+  border: solid 1px #2F4D0B
+}
+
 @media (max-width: 1199px) {
   .player-list {
     flex-basis: 25%;
