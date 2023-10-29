@@ -10,8 +10,8 @@ interface TableProps {
 
 const Table = ({ cards }: TableProps): ReactElement => {
 
-  const { player, room, secret } = useGameContext();
-  const [selected, setSelected] = useState<number | null>(null);
+  const { player, room, secret, vote } = useGameContext();
+  const [ selected, setSelected ] = useState<number | null>(null);
 
   const numericCards = cards?.filter(card => card.type === 'numeric');
   const specialCards = cards?.filter(card => card.type === 'special');
