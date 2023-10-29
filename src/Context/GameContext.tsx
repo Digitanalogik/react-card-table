@@ -57,11 +57,19 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
 
     const vote = (playerId: string, vote: ScrumPokerVote) => {
       const votedPlayer = players.find(p => p.id === playerId);
+      
       if (votedPlayer) {
         votedPlayer.hasVoted = true;
         votedPlayer.vote = vote;
       }
       setPlayers([ ...players ]);
+      
+      if (player.id === playerId) {
+        const updatedPlayer = { ...player };
+        updatedPlayer.hasVoted = true;
+        updatedPlayer.vote = vote;
+        setPlayer(updatedPlayer);
+      }
     };
 
     return {
