@@ -15,9 +15,9 @@ const PlayerList = (): ReactElement => {
 
       if (Array.isArray(response)) {
         const dtoPlayers: ScrumPokerPlayer[] = response.map(p => {
-          const dtoPlayer: ScrumPokerPlayer = { id: p.id, name: p.playerName };
+          const dtoPlayer: ScrumPokerPlayer = { id: p.id, name: p.name };
           return dtoPlayer;
-        }) 
+        });
 
         setPlayers(dtoPlayers);
       }
