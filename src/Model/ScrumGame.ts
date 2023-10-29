@@ -1,11 +1,16 @@
 // Scrum Poker default configuration for playing
 
-// ToDo: add interfaces / create types
+export type ScrumPokerVote = {
+  cardValue: number;
+  cardTitle: string;
+}
 
 export type ScrumPokerPlayer = {
   id: string;
   name: string;
   room?: string;
+  vote?: ScrumPokerVote;
+  hasVoted?: boolean;
 }
 
 export const DEFAULT_PLAYER: ScrumPokerPlayer = {
@@ -26,18 +31,4 @@ export const CARDS = [
   { id: 8, type: 'special', value: 0, title: 'Zero', description: "Shouldn't implement", image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/No-Symbol.svg/240px-No-Symbol.svg.png' },
   { id: 9, type: 'special', value: 0, title: 'Confused', description: "Don't understand", image: 'https://cdn-icons-png.flaticon.com/512/5969/5969738.png' },
   { id: 10, type: 'special', value: 0, title: 'Coffee Break', description: "Let's have a break", image: 'https://icons.iconarchive.com/icons/iconarchive/fat-sugar-food/256/Drink-Coffee-icon.png' },
-];
-
-// ToDo: get players from backend - this is just test data
-export const PLAYERS: ScrumPokerPlayer[]  = [
-  { id: "1", name: 'Alice' },
-  { id: "2", name: 'Bob' },
-  { id: "3", name: 'Charlie' },
-  { id: "4", name: 'David' },
-  { id: "5", name: 'Eva' },
-  { id: "6", name: 'Fiona' },
-  { id: "7", name: 'George' },
-  { id: "8", name: 'Hannah' },
-  { id: "9", name: 'Igor' },
-  { id: "10", name: 'Jane' }
 ];
