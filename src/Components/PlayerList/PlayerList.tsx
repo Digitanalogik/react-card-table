@@ -33,13 +33,21 @@ const PlayerList = (): ReactElement => {
     console.groupEnd();
   }, [players]);
 
+  const getClassNames = (player: ScrumPokerPlayer): string => {
+    let classNames = 'player-name';
+    if (player.hasVoted) {
+      classNames += ' voted';
+    }
+    return classNames;
+  }
+
   // Always show current player on top of the list
   return (
     <div className='player-list'>
         <div key={player.id} className='player-name'>{player.name}</div>
 
         {players.filter(p => p.id !== player.id).map(p =>
-            <div key={p.id} className='player-name'>{p.name}</div>
+          <div key={p.id} className={getClassNames(p)}>{p.name}</div>
         )}
     </div>
   );
