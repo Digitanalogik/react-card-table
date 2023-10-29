@@ -1,5 +1,5 @@
 import { ReactElement, createContext, useContext, useState, useMemo } from 'react';
-import { ScrumPokerPlayer, DEFAULT_PLAYER } from '../Model/ScrumGame';
+import { ScrumPokerPlayer, DEFAULT_PLAYER, ScrumPokerVote } from '../Model/ScrumGame';
 
 type GameContextType = {
   isLogged: boolean;
@@ -19,6 +19,8 @@ type GameContextType = {
 
   secret: string;
   setSecret: (secret: string) => void;
+
+  vote: (playerId: string, vote: ScrumPokerVote) => void;
 }
 
 interface GameContextProps {
@@ -47,19 +49,29 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
   const gameContextProviderValue = useMemo(() => {
     const addPlayer = (player: ScrumPokerPlayer) => {
       setPlayers([ ...players, player ]);
-    }
+    };
   
     const removePlayer = (id: string) => {
       setPlayers(players.filter(player => player.id !== id));
-    }
-  
+    };
+
+    const vote = (playerId: string, vote: ScrumPokerVote) => {
+      const votedPlayer = players.find(p => p.id === playerId);
+      if (votedPlayer) {
+        votedPlayer.hasVoted = true;
+        votedPlayer.vote = vote;
+      }
+      setPlayers([ ...players ]);
+    };
+
     return {
       isLogged, setIsLogged,
       room, setRoom,
       secret, setSecret,
       player, setPlayer,
       players, setPlayers,
-      addPlayer, removePlayer 
+      addPlayer, removePlayer,
+      vote
     };
   }, [ isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers ]);
   
