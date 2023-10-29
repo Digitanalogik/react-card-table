@@ -1,7 +1,7 @@
 import React, { ReactElement, createContext, useContext, useState, useEffect, useMemo } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useGameContext } from './GameContext';
-import { ScrumPokerPlayer } from '../Model/ScrumGame';
+import { ScrumPokerPlayer, ScrumPokerVote } from '../Model/ScrumGame';
 
 type WebSocketMessageType = {
   message: string;
@@ -37,7 +37,7 @@ const useWebSocketContext = (): WebSocketContextType => {
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
 
-  const { player, addPlayer, removePlayer, isLogged } = useGameContext();
+  const { player, addPlayer, removePlayer, isLogged, vote } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
   const [ messageHistory, setMessageHistory ] = useState<WebSocketMessageType[]>([]);
@@ -81,7 +81,8 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
             newMessage.message = data.name + " is disconnected from the game.";
           } else if (data?.action === "player-vote") {
             newMessage.message = data.name + " voted.";
-            // ToDo: Update player vote
+            const receivedVote: ScrumPokerVote = { cardValue: data.cardValue, cardTitle: data.cardTitle };
+            vote(data.id, receivedVote);
           } else if (data?.action === "player-message") {
             newMessage.message = data.name + ": " + data.message;
           } else {
