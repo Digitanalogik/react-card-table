@@ -2,6 +2,7 @@ import { ReactElement, useState } from 'react';
 import Card, { CardProps } from '../Card/Card';
 import { post } from '../../Services/ApiClient';
 import { useGameContext } from '../../Context/GameContext';
+import { ScrumPokerVote } from '../../Model/ScrumGame';
 import './Table.css';
 
 interface TableProps {
@@ -64,6 +65,9 @@ const Table = ({ cards }: TableProps): ReactElement => {
     try {
       const response = await post('/card', JSON.stringify(postData));
       console.log('Response from API:', response);
+
+      const votedCard: ScrumPokerVote = { cardValue: card.value, cardTitle: card.title };
+      vote(player.id, votedCard);
     } catch (error) {
       console.error('Error during API request:', error);
     }    
