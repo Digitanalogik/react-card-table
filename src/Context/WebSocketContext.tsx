@@ -37,7 +37,7 @@ const useWebSocketContext = (): WebSocketContextType => {
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
 
-  const { player, addPlayer, removePlayer, isLogged, vote } = useGameContext();
+  const { player, addPlayer, removePlayer, isLogged, vote, allPlayersHaveVoted } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
   const [ messageHistory, setMessageHistory ] = useState<WebSocketMessageType[]>([]);
@@ -81,8 +81,13 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
             newMessage.message = data.name + " is disconnected from the game.";
           } else if (data?.action === "player-vote") {
             newMessage.message = data.name + " voted.";
-            const receivedVote: ScrumPokerVote = { cardValue: data.cardValue, cardTitle: data.cardTitle };
+            const receivedVote: ScrumPokerVote = { cardValue: parseFloat(data.cardValue), cardTitle: data.cardTitle };
             vote(data.id, receivedVote);
+
+            if (allPlayersHaveVoted()) {
+              newMessage.message = "All players have voted!";
+            }
+
           } else if (data?.action === "player-message") {
             newMessage.message = data.name + ": " + data.message;
           } else {
