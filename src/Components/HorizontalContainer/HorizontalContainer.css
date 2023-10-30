@@ -1,0 +1,8 @@
+.horizontal-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px green;
+  flex-basis: 30%
+}
