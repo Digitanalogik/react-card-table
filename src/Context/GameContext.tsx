@@ -21,6 +21,7 @@ type GameContextType = {
   setSecret: (secret: string) => void;
 
   vote: (playerId: string, vote: ScrumPokerVote) => void;
+  allPlayersHaveVoted: () => boolean;
 }
 
 interface GameContextProps {
@@ -72,6 +73,10 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
       }
     };
 
+    const allPlayersHaveVoted = (): boolean => {
+      return players.length > 0 && players.every(player => player.hasVoted);
+    };
+
     return {
       isLogged, setIsLogged,
       room, setRoom,
@@ -79,7 +84,7 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
       player, setPlayer,
       players, setPlayers,
       addPlayer, removePlayer,
-      vote
+      vote, allPlayersHaveVoted
     };
   }, [ isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers ]);
   
