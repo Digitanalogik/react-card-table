@@ -2,16 +2,32 @@ import { ReactElement } from 'react';
 import Header from './Components/Header/Header';
 import Login from './Components/Login/Login';
 import Table from './Components/Table/Table';
+import Result from './Components/Result/Result';
 import PlayerList from './Components/PlayerList/PlayerList';
+import MessageBox from './Components/MessageBox/MessageBox';
+import VerticalContainer from './Components/VerticalContainer/VerticalContainer';
 import { useGameContext } from './Context/GameContext';
 import { CARDS } from './Model/ScrumGame';
-import VerticalContainer from './Components/VerticalContainer/VerticalContainer';
-import MessageBox from './Components/MessageBox/MessageBox';
 import './App.css';
 
 const App = (): ReactElement => {
 
-  const { isLogged, room } = useGameContext();
+  const { isLogged, room, players, allPlayersHaveVoted } = useGameContext();
+
+  const renderResults = (): ReactElement => {
+    return (
+      <div className='card-table-app'>
+        <Header title={`Results in ${room}`} />
+        <div className='content'>
+          <Result />
+          <VerticalContainer>
+            <PlayerList />
+            <MessageBox />
+          </VerticalContainer>
+        </div>
+      </div>
+    );
+  };
 
   const renderCardTable = (): ReactElement => {
     return (
@@ -38,9 +54,13 @@ const App = (): ReactElement => {
       </div>
     );
   };
-  
+
   if (isLogged) {
-    return renderCardTable();
+    if (allPlayersHaveVoted()) {
+      return renderResults();
+    } else {
+      return renderCardTable();
+    }
   } else {
     return renderRoomSelect();
   }
