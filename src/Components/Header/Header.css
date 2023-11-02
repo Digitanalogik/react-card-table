@@ -13,8 +13,14 @@
   font-weight: 700;
 }
 
+.header-left {
+  justify-content: flex-start;
+}
+
+
 .header-title {
   flex-basis: 70%;
+  justify-self: flex-start;
 }
 
 #new,

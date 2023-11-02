@@ -38,7 +38,7 @@ const Header = ({ title, noLogout }: HeaderProps): ReactElement => {
 
   if (noLogout || !isLogged) {
     return (
-      <div className='header'>{title}</div>
+      <div className='header header-left'>{title}</div>
     );
   } else {
     return (
