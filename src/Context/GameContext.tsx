@@ -25,6 +25,8 @@ type GameContextType = {
 
   showCards: boolean;
   setShowCards: (isLogged: boolean) => void;
+
+  startNewGame: () => void;
 }
 
 interface GameContextProps {
@@ -81,6 +83,22 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
       return players.length > 0 && players.every(player => player.hasVoted);
     };
 
+    const startNewGame = (): void => {
+      // Clear all votes
+      setPlayers(players.map(player => {
+        player.hasVoted = false;
+        player.vote = undefined;
+        return player;  
+      }));
+
+      // Also the current player
+      player.hasVoted = false;
+      player.vote = undefined;
+
+      // Disable condition to show results
+      setShowCards(false);
+    };
+
     return {
       isLogged, setIsLogged,
       room, setRoom,
@@ -89,7 +107,8 @@ const GameContextProvider = ({ children }: GameContextProps): ReactElement => {
       players, setPlayers,
       addPlayer, removePlayer,
       vote, allPlayersHaveVoted,
-      showCards, setShowCards
+      showCards, setShowCards,
+      startNewGame
     };
   }, [ isLogged, setIsLogged, room, setRoom, secret, setSecret, player, setPlayer, players, setPlayers, showCards, setShowCards ]);
   
