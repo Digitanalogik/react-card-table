@@ -26,8 +26,8 @@ const MessageBox = () => {
   return (
     <div className="message-box">
       <InputBox />
-      <InfoRow data={connectionStatus} />
       {renderMessages()}
+      <InfoRow data={connectionStatus} />
     </div>
   )
 };
