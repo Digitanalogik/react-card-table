@@ -1,8 +1,9 @@
 .header {
   height: 50px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-left: 1em;
   border-bottom: solid 1px #6C7521;
   background-color: #A8B160;
@@ -12,21 +13,67 @@
   font-weight: 700;
 }
 
+.header-title {
+  flex-basis: 70%;
+}
+
+#new,
+#flip,
 #logout {
   height: 50px;
-  width: 5rem;
   font-size: 1.25rem;
   font-weight: 600;
+  justify-self: flex-end;
+  flex-basis: 10%;
+}
+
+#new {
+  border: solid 1px #63833B;
+  background-color: #D5E9BD;
+  box-shadow: -1px 0 1px 1px rgba(74, 111, 28, 0.5),
+               1px 0 1px 1px #E9F3DD inset;
+}
+
+#new:hover {
+  border: solid 1px #86AB59;
+  background-color: #AECD89;
+  box-shadow: -1px 0 1px 1px rgba(71, 108, 25, 0.5),
+               1px 0 1px 1px #D7EBBE inset;
+}
+
+#new:focus,
+#new:active {
+  border: solid 1px #668A39;
+  background-color: #87AC59;
+  box-shadow: -1px 0 1px 1px rgba(46, 77, 8, 0.5),
+               1px 0 1px 1px #B3D28E inset;
+}
+
+#flip {
+  border: solid 1px #2F6846;
+  background-color: #98BBA6;
+  box-shadow: -1px 0 1px 1px rgba(103, 29, 59, 0.5),
+               1px 0 1px 1px #C6DACE inset;
+}
+
+#flip:hover {
+  border: solid 1px #468760;
+  background-color: #6CA282;
+  box-shadow: -1px 0 1px 1px rgba(105, 26, 58, 0.5),
+               1px 0 1px 1px #9CC1AB inset;
+}
+
+#logout {
   border: solid 1px #7C3853;
   background-color: #DDB3C4;
-  box-shadow: -1px 0 1px 1px rgba(103, 29, 59, 0.5),
+  box-shadow: -1px 0 1px 1px rgba(26, 87, 51, 0.5),
                1px 0 1px 1px #EBD6DF inset;
 }
 
 #logout:hover {
   border: solid 1px #A15473;
   background-color: #C1819B;
-  box-shadow: -1px 0 1px 1px rgba(105, 26, 58, 0.5),
+  box-shadow: -1px 0 1px 1px rgba(28, 89, 53, 0.5),
                1px 0 1px 1px #E0B5C6 inset;
 }
 
