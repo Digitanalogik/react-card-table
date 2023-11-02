@@ -37,7 +37,7 @@ const useWebSocketContext = (): WebSocketContextType => {
 
 const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactElement => {
 
-  const { player, addPlayer, removePlayer, isLogged, vote, allPlayersHaveVoted, setShowCards } = useGameContext();
+  const { player, addPlayer, removePlayer, isLogged, vote, allPlayersHaveVoted, setShowCards, startNewGame } = useGameContext();
   const [ connectionStatus, setConnectionStatus ] = useState<string>("");
 
   const [ messageHistory, setMessageHistory ] = useState<WebSocketMessageType[]>([]);
@@ -97,6 +97,7 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
           } else if (data?.action === "new") {
             newMessage.message = data.name + " is requesting to start a new game.";
             console.log("New game action received.", data);
+            startNewGame();
           } else {
             // ToDo: Handle more actions...
             newMessage.message = "Unknown action: " + data.action + " (" + JSON.stringify(data) + ")";
