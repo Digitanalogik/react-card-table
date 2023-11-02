@@ -90,6 +90,12 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
 
           } else if (data?.action === "player-message") {
             newMessage.message = data.name + ": " + data.message;
+          } else if (data?.action === "flip") {
+            newMessage.message = data.name + " is requesting to flip cards";
+            console.log("Flip cards action received.", data);
+          } else if (data?.action === "new") {
+            newMessage.message = data.name + " is requesting to start a new game";
+            console.log("New game action received.", data);
           } else {
             // ToDo: Handle more actions...
             newMessage.message = "Unknown action: " + data.action + " (" + JSON.stringify(data) + ")";
