@@ -37,6 +37,7 @@ const Result = (): ReactElement => {
   const calculateAverage = (): number => {
     // Loop through players and calculate average
     let total: number = 0;
+    let numberOfVotes: number = 0;
     players.forEach((player: ScrumPokerPlayer) => {
       console.log("Player ", player, " voted ", player.vote);
       console.log("Total:", total);
@@ -44,10 +45,11 @@ const Result = (): ReactElement => {
       if (player.vote?.cardValue) {
         console.log("Adding...", player.vote?.cardValue);
         total += player.vote?.cardValue;
+        numberOfVotes++;
       }
     });
     console.log("Total: ", total);
-    const average = total / players.length;
+    const average = total / numberOfVotes;
     console.log("Average: ", average);
 
     // Round average to two decimals
