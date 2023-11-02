@@ -53,7 +53,7 @@ const WebSocketContextProvider = ({ children }: WebSocketContextProps): ReactEle
     } else {
       setWebsocketURL(null);
     }
-  }, [player, isLogged, setWebsocketURL]);
+  }, [player, isLogged, setWebsocketURL, DEFAULT_URL]);
 
   const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket(websocketURL, {
     onOpen: () => {
