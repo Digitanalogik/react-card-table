@@ -13,6 +13,21 @@ const Header = ({ title, noLogout }: HeaderProps): ReactElement => {
   const { isLogged, setIsLogged  } = useGameContext();
   const { sendMessage } = useWebSocketContext();
 
+  const newGame = () => {
+    if (window.confirm("Start new game?")) {
+      const NEW_ACTION = `{"action":"new"}`;
+      console.log("Sending message over WebSocket: ", NEW_ACTION);
+      sendMessage(NEW_ACTION);
+    }
+  }
+
+  const flipCards = () => {
+    if (window.confirm("Flip cards?")) {
+      const FLIP_ACTION = `{"action":"flip"}`;
+      sendMessage(FLIP_ACTION);
+    }
+  }
+
   const confirmLogout = () => {
     if (window.confirm("Exit room?")) {
       const LOGOUT_ACTION = `{"action":"logout"}`;
@@ -27,7 +42,10 @@ const Header = ({ title, noLogout }: HeaderProps): ReactElement => {
     );
   } else {
     return (
-      <div className='header'>{title}
+      <div className='header'>
+        <span className='header-title'>{title}</span>
+        <button id='new' onClick={newGame}>New Game</button>
+        <button id='flip' onClick={flipCards}>Flip Cards</button>
         <button id='logout' onClick={confirmLogout}>Exit</button>
       </div>
     );
