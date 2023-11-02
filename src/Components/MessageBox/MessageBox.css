@@ -7,4 +7,6 @@
   right: 0;
   bottom: 0;
   border-top: solid 1px rgba(64, 64, 64, 0.75);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
