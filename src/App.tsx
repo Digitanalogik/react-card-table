@@ -12,7 +12,7 @@ import './App.css';
 
 const App = (): ReactElement => {
 
-  const { isLogged, room, players, allPlayersHaveVoted } = useGameContext();
+  const { isLogged, room, allPlayersHaveVoted, showCards } = useGameContext();
 
   const renderResults = (): ReactElement => {
     return (
@@ -56,7 +56,7 @@ const App = (): ReactElement => {
   };
 
   if (isLogged) {
-    if (allPlayersHaveVoted()) {
+    if (allPlayersHaveVoted() || showCards) {
       return renderResults();
     } else {
       return renderCardTable();
